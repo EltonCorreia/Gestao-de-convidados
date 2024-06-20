@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	
+		<meta charset="UTF-8">
+		<title>Lista de Convidados</title>
+		
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<script src="/js/bootstrap.bundle.min.js" ></script>	
+			
+	</head>
+	
+	<body>
+	
+	<script>
+	
+	function validarQuantidade(){
+		const quantidade = document.getElementById("acompanhante").value;
+		
+		if(quantidade > 2){
+			alert("O campo acompanhante não pode ultrapassar 2!");
+			return false;
+		}
+		return true;
+		
+	}
+	
+	</script>
+		
+		<div class="container">
+		
+		<h2>Lista de Convidados</h2>
+		
+		<form action="/salvar" onsubmit="return validarQuantidade()" method="post">
+		
+						 	<div class="row">
+						  
+						    	<div class="col">
+						    		<input type="text" class="form-control" placeholder="Nome" name="nome" required>
+						    	</div>
+						    
+						    	<div class="col">
+						    		<input type="number" class="form-control" placeholder="Acompanhante" id="acompanhante" name="acompanhante" required>
+						    	</div>
+						    
+						    	<div class="col">
+						   			<input type="submit" class="btn btn-success" value="Enviar" name="enviar">
+						    	</div>		
+						    			    
+						  	</div>
+						  	
+			</form>
+						
+			<table class="table">
+						
+							<thead>
+						
+								<tr>
+						
+									<th>Nome dos convidado</th>
+									<th>Quantidade dos acompanhantes</th>
+									<th>Ações</th>
+						
+								</tr>
+						
+							</thead>
+							
+							<tbody>
+							
+								<tr th:each="convidado: ${convidados}">
+								
+									<td th:text="${convidado.nome}"></td>
+									<td th:text="${convidado.acompanhante}"></td>
+									<td>
+									
+									<a class="btn btn-danger" th:href="@{/excluir/{id}(id = ${convidado.id})}">Excluir</a>
+									<a class="btn btn-primary" th:href="@{/atualizar/{id}(id = ${convidado.id})}">Atualizar</a>
+									
+									</td>
+								
+								</tr>
+							
+							</tbody>
+						
+		</table>
+			
+		</div>
+			
+	</body>
+	
+</html>

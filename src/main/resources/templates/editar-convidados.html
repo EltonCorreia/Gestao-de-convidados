@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	
+		<meta charset="UTF-8">
+		<title>Editar convidado</title>
+		
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<script src="/js/bootstrap.bundle.min.js" ></script>	
+			
+	</head>
+	
+	<body>
+	
+	<script>
+	
+	function validarQuantidade(){
+		const quantidade = document.getElementById("acompanhante").value;
+		
+		if(quantidade > 2){
+			alert("O campo acompanhante não pode ultrapassar 2!");
+			return false;
+		}
+		return true;
+		
+	}
+	
+	</script>
+		
+		<div class="container">
+		
+		<h2>Convidado</h2>
+		
+		<form action="/salvar" onsubmit="return validarQuantidade()" method="post" th:object="${convidado}">
+		
+						 	<div class="row">
+						  
+						  		<input type="hidden" name="id" th:value="${convidado.id}">
+						  
+						    	<div class="col">
+						    		<input type="text" class="form-control" placeholder="Nome" name="nome" required th:value="${convidado.nome}">
+						    	</div>
+						    
+						    	<div class="col">
+						    		<input type="number" class="form-control" placeholder="Acompanhante" id="acompanhante" name="acompanhante" required th:value="${convidado.numeroAcompanhante}">
+						    	</div>
+						    
+						    	<div class="col">
+						   			<input type="submit" class="btn btn-success" value="Atualizar">
+						    	</div>	
+						    			    
+						  	</div>
+						  	
+			</form>
+			
+		</div>
+			
+	</body>
+	
+</html>
